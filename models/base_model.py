@@ -8,9 +8,12 @@ from sqlalchemy import Column
 from sqlalchemy import DateTime
 from sqlalchemy import String
 
+Base = declarative_base()
+
 
 class BaseModel:
     """Defines the BaseModel class.
+
     Attributes:
         id (sqlalchemy String): The BaseModel id.
         created_at (sqlalchemy DateTime): The datetime at creation.
@@ -23,6 +26,7 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """Initialize a new BaseModel.
+
         Args:
             *args (any): Unused.
             **kwargs (dict): Key/value pairs of attributes.
@@ -36,13 +40,7 @@ class BaseModel:
                 if key != "__class__":
                     setattr(self, key, value)
 
-    def __str__(self):
-        """Return the print/str representation of the BaseModel instance."""
-        d = self.__dict__.copy()
-        d.pop("_sa_instance_state", None)
-        return "[{}] ({}) {}".format(type(self).__name__, self.id, d)
-
-     def save(self):
+    def save(self):
         """Update updated_at with the current datetime."""
         self.updated_at = datetime.utcnow()
         models.storage.new(self)
@@ -50,6 +48,7 @@ class BaseModel:
 
     def to_dict(self):
         """Return a dictionary representation of the BaseModel instance.
+
         Includes the key/value pair __class__ representing
         the class name of the object.
         """
@@ -59,7 +58,13 @@ class BaseModel:
         my_dict["updated_at"] = self.updated_at.isoformat()
         my_dict.pop("_sa_instance_state", None)
         return my_dict
-    
+
     def delete(self):
         """Delete the current instance from storage."""
         models.storage.delete(self)
+
+    def __str__(self):
+        """Return the print/str representation of the BaseModel instance."""
+        d = self.__dict__.copy()
+        d.pop("_sa_instance_state", None)
+        return "[{}] ({}) {}".format(type(self).__name__, self.id, d)
