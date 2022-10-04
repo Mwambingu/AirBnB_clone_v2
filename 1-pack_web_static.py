@@ -9,7 +9,7 @@ def do_pack():
     """Function that generates a tar of /web_static"""
     try:
         local(
-                'tar -cvzf "versions/web_static$(date \'+%Y%m%d%H%M%S\')".tar\
+                'tar -cvzf "versions/web_static_$(date \'+%Y%m%d%H%M%S\')".tar\
                 ./web_static')
         return "versions/"
     except Exception:
