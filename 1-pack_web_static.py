@@ -10,7 +10,7 @@ from datetime import datetime
 def do_pack():
     """Function that generates a tar of /web_static"""
     dt = datetime.utcnow().strftime("%Y%m%d%H%M%S")
-    file = "versions/web_static_{}.tar".format(dt)
+    file = "versions/web_static_{}.tgz".format(dt)
     if os.path.isdir("versions") is False:
         if local("mkdir -p versions").failed is True:
             return None
