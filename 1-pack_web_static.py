@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
 Contain a function that generates tar file of /web_static/ dir
 """
