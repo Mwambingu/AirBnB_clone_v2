@@ -62,8 +62,6 @@ def do_clean(number=0):
     fl_l = local("ls -t versions/* | awk 'NR>{}'".format(number), capture=True)
     fl_r = run("ls -t /data/w*/r*/ | awk 'NR>{}'".format(number))
     if fl_l:
-        print("files found local")
         local("rm `ls -t versions/* | awk 'NR>{}'`".format(number))
     if fl_r:
-        print("files found")
         run("rm -rf `ls -dt /data/w*/r*/* | awk 'NR>{}'`".format(number))
